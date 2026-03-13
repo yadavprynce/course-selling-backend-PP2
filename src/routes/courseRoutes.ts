@@ -3,7 +3,7 @@ import { requireRole } from "../middlewares/roleMiddleware"
 import { verifyToken } from "../middlewares/authMiddleware"
 import { createCourse, deleteCourse, getCourses, modifyCourse } from "../controllers/courseControllers"
 
-const courseRouter = express.Router()
+export const courseRouter = express.Router()
 
 courseRouter.post("/courses", verifyToken, requireRole("INSTRUCTOR"), createCourse)
 courseRouter.get("/courses/:id", getCourses)
