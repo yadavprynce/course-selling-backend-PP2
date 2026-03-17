@@ -16,8 +16,6 @@ export const connectDB = async() => {
    try {
      await prisma.$connect()
      console.log("DB connection successful")
-     app.listen(Env.PORT)
-     console.log(`Listening on PORT ${Env.PORT}`)
      
     }catch(error : any){
         message: `Error connecting Db :  ${error.message}`

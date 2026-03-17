@@ -12,7 +12,7 @@ export const createLesson = async (req: Request, res: Response, next: NextFuncti
     }
 
     const { title, courseId, content } = parsedData.data
-
+   
 
     try {
         const lessons = await prisma.lesson.create({
@@ -51,9 +51,9 @@ export const getCourse = async (req: Request, res: Response, next: NextFunction)
             })
         }
 
-        res.status(200).json(getCourse.lessons.map((less) => ({
-            id: less.id,
-            title: less.title
+        res.status(200).json(getCourse.lessons.map((course) => ({
+            CourseTitle: course.title,
+            Lessons:course.content
         })))
 
     } catch (error) {

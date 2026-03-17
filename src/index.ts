@@ -6,21 +6,23 @@ import { courseRouter } from "./routes/courseRoutes";
 import { lessonRouter } from "./routes/lessonRoutes";
 import { purchaseRouter } from "./routes/purchaseRoutes";
 import cookieParser from "cookie-parser"
+import { Env } from "./config/env";
 
 
-connectDB()
+await connectDB()
 const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
 
-app.use(globalErrorMiddleware)
-
-app.use("/" , authRouter)
 
 app.use("/" , authRouter)
 app.use("/" , courseRouter)
 app.use("/" , lessonRouter)
 app.use("/" , purchaseRouter)
 
+app.use(globalErrorMiddleware)
+
+app.listen(Env.PORT)
+console.log(`Listening on PORT ${Env.PORT}`)
 

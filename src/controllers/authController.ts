@@ -2,7 +2,6 @@ import type { NextFunction, Request, Response } from "express"
 import { signUpSchema } from "../validators/signUpValidator"
 import { prisma } from "../config/db"
 import bcrypt from 'bcrypt'
-import { globalErrorMiddleware } from "../middlewares/globalErrorMiddleware"
 import { loginSchema } from "../validators/loginValidator"
 import { generateToken } from "../utils/generateToken"
 import { Env } from "../config/env"
@@ -36,11 +35,12 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
             data: {
                 name,
                 email,
-                password: hashedPassword
+                password: hashedPassword,
+                role
             }
         })
 
-        res.status(200).json({
+        res.status(201).json({
             message: "User created successfully"
         })
 
@@ -68,7 +68,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     if (!foundUser) {
         return res.status(404).json({
-            message: "Email bnit registered"
+            message: "Email not registered"
         })
     }
 
